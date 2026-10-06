@@ -11,7 +11,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 #app{position:relative;width:100%;height:100%;overflow:hidden;background:#fff}
 .screen{position:absolute;inset:0;display:none;background:#fff}
 .screen.active{display:block}
-.page{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center top;display:block;background:#fff}
+.page{position:absolute;left:50%;top:0;width:100%;height:100%;max-width:100%;max-height:100%;transform:translateX(-50%);object-fit:contain;object-position:center top;display:block;background:#fff}
 .hit{position:absolute;border:0;background:transparent;padding:0;margin:0;cursor:pointer}
 
 #loanHit{left:0;bottom:0;width:50%;height:18%;z-index:10}
@@ -215,6 +215,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 .loan-details-box{border-radius:9px;padding:4px 9px}
 .loan-detail-row{padding:7px 0;font-size:11px}
 .done-empty{padding:12px 0 4px;font-size:13px}
+@media (max-aspect-ratio: 9/19){ .page{width:100%;height:100%;object-fit:contain} }
+@media (min-aspect-ratio: 9/19){ .page{width:100%;height:100%;object-fit:contain} }
 </style>
 </head>
 
@@ -281,7 +283,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
       <div class="detail-big">₦397,000</div>
       <div class="detail-phase">Repayment amount&nbsp;&nbsp; 1/2Phase</div>
       <div class="detail-line"></div>
-      <div class="due-row"><span>Due Date</span><span class="due-date">21/08/2025</span><span class="overdue-pill">overdue 441 day</span><button id="billRepay" class="repay-outline" type="button">Repay now</button></div>
+      <div class="due-row"><span>Due Date</span><span class="due-date">21/09/2025</span><span class="overdue-pill">overdue 441 day</span><button id="billRepay" class="repay-outline" type="button">Repay now</button></div>
       <div class="waiver"><span class="waiver-icon">🎟</span><span>On time repayment, we will waive the full amount of the second installment for you</span></div>
     </div>
   </div>
@@ -454,18 +456,34 @@ document.getElementById("backHistory").onclick=()=>show("bill");
 document.getElementById("historyRow").onclick=()=>show("billDetail");
 document.getElementById("backDetail").onclick=()=>show("history");
 document.getElementById("detailRepay").onclick=startRepaymentFlow;
-document.querySelector("#billDetail .tab.active").onclick=()=>{
+const loanTimeVal=document.getElementById("loanTimeVal");
+const dueDateVal=document.getElementById("dueDateVal");
+const cycleVal=document.getElementById("cycleVal");
+function setRepaymentDetails(){
+  loanTimeVal.textContent="21/08/2025";
+  dueDateVal.textContent="21/09/2025";
+  cycleVal.textContent="30 days";
+}
+function setDoneDetails(){
+  loanTimeVal.textContent="21/08/2026";
+  dueDateVal.textContent="21/08/2026";
+  cycleVal.textContent="30 days";
+}
+document.querySelector("#billDetail .tab:first-child").onclick=()=>{
   document.getElementById("repaymentTabContent").style.display="block";
   document.getElementById("doneTabContent").style.display="none";
   document.querySelectorAll("#billDetail .tab").forEach(t=>t.classList.remove("active"));
   document.querySelector("#billDetail .tab:first-child").classList.add("active");
+  setRepaymentDetails();
 };
 document.getElementById("doneTab").onclick=()=>{
   document.getElementById("repaymentTabContent").style.display="none";
   document.getElementById("doneTabContent").style.display="block";
   document.querySelectorAll("#billDetail .tab").forEach(t=>t.classList.remove("active"));
   document.getElementById("doneTab").classList.add("active");
+  setDoneDetails();
 };
+setRepaymentDetails();
 
 startInitialFlow();
 </script>
