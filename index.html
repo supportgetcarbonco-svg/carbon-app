@@ -171,7 +171,13 @@ function startRepaymentFlow(){
   },3000);
 }
 
-document.getElementById("splashTap").onclick=()=>show("loan");
+function continueFromFirstPage(){
+  show("loan");
+}
+
+// The entire first display is tappable/clickable.
+document.getElementById("splash").addEventListener("click", continueFromFirstPage, {passive:true});
+document.getElementById("splash").addEventListener("touchend", continueFromFirstPage, {passive:true});
 
 document.getElementById("applyHit").onclick=()=>{
   document.getElementById("limitBackdrop").classList.add("show");
