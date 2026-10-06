@@ -3,9 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <title>LendSafe</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -32,12 +29,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 
 .loading-screen{
   background:#faf8fd!important;
-  display:none;
+  display:flex!important;
   align-items:center;
   justify-content:center;
-}
-.loading-screen.active{
-  display:flex;
 }
 .loading-box{
   width:72px;
@@ -88,7 +82,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
   padding:11px 24px;
   font-size:16px;
 }
-
 </style>
 </head>
 
@@ -159,30 +152,29 @@ const screens={
 };
 
 function show(name){
-  Object.keys(screens).forEach(key => {
-    screens[key].classList.toggle("active", key === name);
-  });
+  Object.values(screens).forEach(s=>s.classList.remove("active"));
+  screens[name].classList.add("active");
 }
 
 function startInitialFlow(){
   show("splash");
 
-  setTimeout(function(){
+  setTimeout(()=>{
     show("initialLoading");
 
-    setTimeout(function(){
+    setTimeout(()=>{
       show("loan");
-    }, 10000);
+    },5000);
 
-  }, 1500);
+  },1500);
 }
 
 function startRepaymentFlow(){
   show("repayLoading");
 
-  setTimeout(function(){
+  setTimeout(()=>{
     show("repayment");
-  }, 10000);
+  },5000);
 }
 
 document.getElementById("applyHit").onclick=()=>{
