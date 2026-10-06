@@ -13,7 +13,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 #app{position:relative;width:100%;height:100%;overflow:hidden;background:#fff}
 .screen{position:absolute;inset:0;display:none;background:#fff}
 .screen.active{display:block}
-.page{position:absolute;left:50%;top:0;width:100%;height:100%;max-width:100%;max-height:100%;transform:translateX(-50%);object-fit:fill;object-position:center top;display:block;background:#fff}
+.page{position:absolute;left:50%;top:0;width:100%;height:100%;max-width:100%;max-height:100%;transform:translateX(-50%);object-fit:contain;object-position:center top;display:block;background:#fff}
 .hit{position:absolute;border:0;background:transparent;padding:0;margin:0;cursor:pointer}
 
 #loanHit{left:0;bottom:0;width:50%;height:18%;z-index:10}
@@ -153,7 +153,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 .loan-detail-row .danger{color:#ff3348}
 .done-empty{padding:24px 0 8px;font-size:20px;font-weight:600;display:flex;justify-content:space-between;color:#292a31}
 .done-empty span{color:#b4b5bc;font-weight:400}
-#myBillHit{left:5%;top:17%;width:90%;height:6%}
+#myBillHit{left:4%;top:27%;width:92%;height:6%;z-index:10}
+#bankAccountHit{left:52%;top:33%;width:44%;height:9%;z-index:10}
+#accountSecurityHit{left:4%;top:43%;width:92%;height:6%;z-index:10}
+#couponHit{left:4%;top:49%;width:92%;height:6%;z-index:10}
+#privacyHit{left:4%;top:55%;width:92%;height:6%;z-index:10}
+#loanTermsHit{left:4%;top:61%;width:92%;height:6%;z-index:10}
+#helpCenterHit{left:4%;top:66%;width:92%;height:7%;z-index:10}
 #backBillHit{left:1%;top:1%;width:12%;height:9%}
 #historyHit{left:31%;top:14%;width:18%;height:6%}
 #historyRowHit{left:0;top:30%;width:100%;height:12%}
@@ -217,8 +223,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 .loan-details-box{border-radius:9px;padding:4px 9px}
 .loan-detail-row{padding:7px 0;font-size:11px}
 .done-empty{padding:12px 0 4px;font-size:13px}
-@media (max-aspect-ratio: 9/19){ .page{width:100%;height:100%;object-fit:fill} }
-@media (min-aspect-ratio: 9/19){ .page{width:100%;height:100%;object-fit:fill} }
+.info-screen{overflow-y:auto!important;overflow-x:hidden;background:#f8f8fc!important;color:#292a31}
+.info-screen .topbar{height:82px;background:#fff;display:flex;align-items:center;padding:0 16px;gap:16px;position:relative}
+.info-screen .back-arrow{font-size:28px;line-height:1;font-weight:300;color:#16171b;width:30px;height:36px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;padding:0}
+.info-screen .title{font-size:20px;font-weight:500;color:#111}
+.info-content{padding:14px 12px 30px}
+.info-card{background:#fff;border-radius:12px;padding:18px 16px;box-shadow:0 1px 3px rgba(0,0,0,.05);font-size:14px;line-height:1.55}
+.info-card h3{margin:0 0 12px;font-size:17px;color:#222}
+.info-card p{margin:9px 0;color:#555}
+.info-row{padding:14px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;gap:12px}
+.info-row:last-child{border-bottom:0}
+.info-muted{color:#999}
+@media (max-aspect-ratio: 9/19){ .page{width:100%;height:100%;object-fit:contain} }
+@media (min-aspect-ratio: 9/19){ .page{width:100%;height:100%;object-fit:contain} }
 </style>
 </head>
 
@@ -257,6 +274,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
   <button id="mineHit2" class="hit" aria-label="Mine"></button>
   <button id="myBillHit" class="hit" aria-label="My bill"></button>
   <button id="bankAccountHit" class="hit" aria-label="Bank account"></button>
+  <button id="accountSecurityHit" class="hit" aria-label="Account security"></button>
+  <button id="couponHit" class="hit" aria-label="Coupon"></button>
+  <button id="privacyHit" class="hit" aria-label="Privacy Policy"></button>
+  <button id="loanTermsHit" class="hit" aria-label="Loan Terms"></button>
+  <button id="helpCenterHit" class="hit" aria-label="Help Center"></button>
 </section>
 
 <section id="bank" class="screen">
@@ -264,6 +286,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
   <button id="backBankHit" class="hit" aria-label="Back"></button>
 </section>
 
+
+<section id="accountSecurity" class="screen info-screen">
+  <div class="topbar"><button id="backAccountSecurity" class="back-arrow" aria-label="Back">‹</button><div class="title">Account security</div></div>
+  <div class="info-content"><div class="info-card"><h3>Account security</h3><div class="info-row"><span>Account protection</span><strong>Enabled</strong></div><div class="info-row"><span>Mobile number</span><span class="info-muted">Verified</span></div><div class="info-row"><span>Login security</span><span class="info-muted">Protected</span></div><p>Keep your account information private and never share verification codes or passwords with anyone.</p></div></div>
+</section>
+<section id="coupon" class="screen info-screen">
+  <div class="topbar"><button id="backCoupon" class="back-arrow" aria-label="Back">‹</button><div class="title">Coupon</div></div>
+  <div class="info-content"><div class="info-card"><h3>Coupon</h3><p>No coupons available.</p></div></div>
+</section>
+<section id="privacy" class="screen info-screen">
+  <div class="topbar"><button id="backPrivacy" class="back-arrow" aria-label="Back">‹</button><div class="title">Privacy Policy</div></div>
+  <div class="info-content"><div class="info-card"><h3>Privacy Policy</h3><p>LendSafe respects your privacy and handles account information for account servicing, loan management, security and support.</p><p>Your information should be used only for legitimate service, verification, security and regulatory purposes and handled in accordance with applicable requirements.</p><p>For questions about your information or privacy, please contact LendSafe support.</p></div></div>
+</section>
+<section id="loanTerms" class="screen info-screen">
+  <div class="topbar"><button id="backLoanTerms" class="back-arrow" aria-label="Back">‹</button><div class="title">Loan Terms</div></div>
+  <div class="info-content"><div class="info-card"><h3>Loan Terms</h3><p>Loan amount, repayment dates, applicable fees and repayment obligations are shown in the loan details provided in the app.</p><p>Please review the repayment schedule and due date before making a repayment.</p><p>Overdue amounts may be subject to applicable charges and reporting requirements.</p></div></div>
+</section>
+<section id="helpCenter" class="screen info-screen">
+  <div class="topbar"><button id="backHelpCenter" class="back-arrow" aria-label="Back">‹</button><div class="title">Help Center</div></div>
+  <div class="info-content"><div class="info-card"><h3>Help Center</h3><p>Need help with your account, repayment, bank account or loan bill?</p><p>Please contact LendSafe support for assistance.</p></div></div>
+</section>
 
 <section id="billLoading" class="screen loading-screen">
   <div class="loading-box"><img src="data:image/png;base64,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" alt="Loading"></div>
@@ -322,7 +365,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
     <div id="repaymentTabContent">
       <div class="period-head"><span>Pending 2 period</span><span style="color:#aaa">₦397,000⌄</span></div>
       <div class="phase-box">
-        <div class="phase-row"><strong>1 phase</strong><span class="money">₦393,000</span><span class="date">21/08/2025</span></div>
+        <div class="phase-row"><strong>1 phase</strong><span class="money">₦363,000</span><span class="date">21/09/2025</span></div>
         <div class="phase-row"><strong>2 phase</strong><span class="money">₦4,000</span><span class="date">21/08/2026</span></div>
       </div>
     </div>
@@ -335,9 +378,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
       <div class="loan-detail-row"><span class="muted">Amount due</span><span class="val">397,000</span></div>
       <div class="loan-detail-row"><span class="muted">Penalty fee</span><span class="val danger">397,000</span></div>
       <div class="loan-detail-row"><span class="muted">Days overdue</span><span class="val">441 day</span></div>
-      <div class="loan-detail-row"><span class="muted">Loan time</span><span class="val">21/08/2024</span></div>
-      <div class="loan-detail-row"><span class="muted">Due date</span><span class="val">21/08/2025</span></div>
-      <div class="loan-detail-row"><span class="muted">Borrowing cycle</span><span class="val">360 days</span></div>
+      <div class="loan-detail-row"><span class="muted">Loan time</span><span class="val">21/08/2025</span></div>
+      <div class="loan-detail-row"><span class="muted">Due date</span><span class="val">21/08/2026</span></div>
+      <div class="loan-detail-row"><span class="muted">Borrowing cycle</span><span class="val">30 days</span></div>
       <div class="loan-detail-row"><span class="muted">Loan number</span><span class="val">LS202508210001</span></div>
     </div>
     <div class="agreement-title"><span>Loan agreement</span><span>⌄</span></div>
@@ -373,7 +416,12 @@ const screens={
   billDetail:document.getElementById("billDetail"),
   bank:document.getElementById("bank"),
   repayLoading:document.getElementById("repayLoading"),
-  repayment:document.getElementById("repayment")
+  repayment:document.getElementById("repayment"),
+  accountSecurity:document.getElementById("accountSecurity"),
+  coupon:document.getElementById("coupon"),
+  privacy:document.getElementById("privacy"),
+  loanTerms:document.getElementById("loanTerms"),
+  helpCenter:document.getElementById("helpCenter")
 };
 
 function show(name){
@@ -451,6 +499,17 @@ document.getElementById("copyHit").onclick=async()=>{
 };
 
 
+document.getElementById("accountSecurityHit").onclick=()=>show("accountSecurity");
+document.getElementById("couponHit").onclick=()=>show("coupon");
+document.getElementById("privacyHit").onclick=()=>show("privacy");
+document.getElementById("loanTermsHit").onclick=()=>show("loanTerms");
+document.getElementById("helpCenterHit").onclick=()=>show("helpCenter");
+document.getElementById("backAccountSecurity").onclick=()=>show("mine");
+document.getElementById("backCoupon").onclick=()=>show("mine");
+document.getElementById("backPrivacy").onclick=()=>show("mine");
+document.getElementById("backLoanTerms").onclick=()=>show("mine");
+document.getElementById("backHelpCenter").onclick=()=>show("mine");
+
 document.getElementById("backBill").onclick=()=>show("mine");
 document.getElementById("historyBtn").onclick=startHistoryFlow;
 document.getElementById("billRepay").onclick=startRepaymentFlow;
@@ -458,34 +517,18 @@ document.getElementById("backHistory").onclick=()=>show("bill");
 document.getElementById("historyRow").onclick=()=>show("billDetail");
 document.getElementById("backDetail").onclick=()=>show("history");
 document.getElementById("detailRepay").onclick=startRepaymentFlow;
-const loanTimeVal=document.getElementById("loanTimeVal");
-const dueDateVal=document.getElementById("dueDateVal");
-const cycleVal=document.getElementById("cycleVal");
-function setRepaymentDetails(){
-  loanTimeVal.textContent="21/08/2025";
-  dueDateVal.textContent="21/09/2025";
-  cycleVal.textContent="30 days";
-}
-function setDoneDetails(){
-  loanTimeVal.textContent="21/08/2026";
-  dueDateVal.textContent="21/08/2026";
-  cycleVal.textContent="30 days";
-}
 document.querySelector("#billDetail .tab:first-child").onclick=()=>{
   document.getElementById("repaymentTabContent").style.display="block";
   document.getElementById("doneTabContent").style.display="none";
   document.querySelectorAll("#billDetail .tab").forEach(t=>t.classList.remove("active"));
   document.querySelector("#billDetail .tab:first-child").classList.add("active");
-  setRepaymentDetails();
 };
 document.getElementById("doneTab").onclick=()=>{
   document.getElementById("repaymentTabContent").style.display="none";
   document.getElementById("doneTabContent").style.display="block";
   document.querySelectorAll("#billDetail .tab").forEach(t=>t.classList.remove("active"));
   document.getElementById("doneTab").classList.add("active");
-  setDoneDetails();
 };
-setRepaymentDetails();
 
 startInitialFlow();
 </script>
