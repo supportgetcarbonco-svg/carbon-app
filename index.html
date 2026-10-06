@@ -29,10 +29,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 
 .loading-screen{
   background:#faf8fd!important;
-  display:flex!important;
+  display:none;
   align-items:center;
   justify-content:center;
 }
+.loading-screen.active{display:flex!important}
 .loading-box{
   width:72px;
   height:72px;
@@ -157,16 +158,8 @@ function show(name){
 }
 
 function startInitialFlow(){
+  // The first page must appear immediately. No initial loading screen.
   show("splash");
-
-  setTimeout(()=>{
-    show("initialLoading");
-
-    setTimeout(()=>{
-      show("loan");
-    },3000);
-
-  },1500);
 }
 
 function startRepaymentFlow(){
