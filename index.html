@@ -15,9 +15,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 #app{position:relative;width:100vw;height:100%;min-height:0;overflow:hidden;background:#fff}
 .screen{position:absolute;left:0;top:0;width:100%;height:100%;display:none;background:#fff;overflow:hidden}
 .screen.active{display:block}
-/* Preserve the supplied 828x1792 artwork ratio exactly. Scale to the viewport without stretching or cropping. */
-.page{position:absolute;left:50%;top:50%;width:auto;height:100%;max-width:100%;max-height:100%;aspect-ratio:828 / 1792;object-fit:contain;object-position:center center;transform:translate(-50%,-50%);display:block;background:#fff;margin:0;padding:0;}
+/* SCREEN FIT MASTER: preserve the supplied artwork ratio exactly.
+   Fill the available screen width, keep the original aspect ratio, and never
+   stretch or center-crop the artwork. */
+.page{position:absolute;left:0;top:0;width:100%;height:auto;max-width:none;max-height:none;aspect-ratio:auto;object-fit:initial;object-position:initial;display:block;background:#fff;margin:0;padding:0;transform:none;}
 .hit{position:absolute;border:0;background:transparent;padding:0;margin:0;cursor:pointer}
+/* Keep every full-page artwork aligned to the physical screen edges on portrait phones. */
+@media (orientation:portrait){
+  #app,.screen{width:100vw;max-width:100vw;left:0;right:0;}
+  .page{width:100vw;max-width:100vw;height:auto;}
+}
+
 
 #loanHit{left:0;bottom:0;width:50%;height:18%;z-index:10}
 #mineHit{right:0;bottom:0;width:50%;height:18%;z-index:10}
@@ -27,7 +35,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 
 #loanHit2{left:0;bottom:0;width:50%;height:18%;z-index:10}
 #mineHit2{right:0;bottom:0;width:50%;height:18%;z-index:10}
-#bankAccountHit{right:5%;top:34.8%;width:8%;height:5.5%;z-index:20}
+#bankAccountHit{right:3%;top:34.2%;width:15%;height:6.5%;z-index:30}
 #backBankHit{left:2%;top:3%;width:12%;height:8%}
 
 #backRepayHit{left:2%;top:3%;width:12%;height:8%}
@@ -157,7 +165,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 .done-empty{padding:24px 0 8px;font-size:20px;font-weight:600;display:flex;justify-content:space-between;color:#292a31}
 .done-empty span{color:#b4b5bc;font-weight:400}
 #myBillHit{left:4%;top:27%;width:92%;height:6%;z-index:10}
-#bankAccountHit{right:5%;top:34.8%;width:8%;height:5.5%;z-index:20}
+#bankAccountHit{right:3%;top:34.2%;width:15%;height:6.5%;z-index:30}
 #accountSecurityHit{left:4%;top:43%;width:92%;height:6%;z-index:10}
 #couponHit{left:4%;top:49%;width:92%;height:6%;z-index:10}
 #privacyHit{left:4%;top:55%;width:92%;height:6%;z-index:10}
@@ -250,6 +258,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 .info-row{padding:14px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;gap:12px}
 .info-row:last-child{border-bottom:0}
 .info-muted{color:#999}
+
+/* Final viewport-fit rule: preserve the supplied 1284×2778 artwork ratio on every phone. */
+html,body,#app{width:100%;height:100%;overflow:hidden;}
+.screen{inset:0;width:100%;height:100%;overflow:hidden;}
+.page{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center center;user-select:none;-webkit-user-drag:none;}
 </style>
 </head>
 
