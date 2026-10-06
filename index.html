@@ -11,10 +11,12 @@
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 @supports (height:100dvh){html,body,#app{height:100dvh}}
-#app{position:relative;width:100%;height:100%;min-height:0;overflow:hidden;background:#fff}
+@supports (height:100svh){html,body,#app{height:100svh}}
+#app{position:relative;width:100vw;height:100%;min-height:0;overflow:hidden;background:#fff}
 .screen{position:absolute;left:0;top:0;width:100%;height:100%;display:none;background:#fff;overflow:hidden}
 .screen.active{display:block}
-.page{position:absolute;left:0;top:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:fill;object-position:center center;display:block;background:#fff;margin:0;padding:0;}
+/* Preserve the supplied 828x1792 artwork ratio exactly. Scale to the viewport without stretching or cropping. */
+.page{position:absolute;left:50%;top:50%;width:auto;height:100%;max-width:100%;max-height:100%;aspect-ratio:828 / 1792;object-fit:contain;object-position:center center;transform:translate(-50%,-50%);display:block;background:#fff;margin:0;padding:0;}
 .hit{position:absolute;border:0;background:transparent;padding:0;margin:0;cursor:pointer}
 
 #loanHit{left:0;bottom:0;width:50%;height:18%;z-index:10}
@@ -25,7 +27,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 
 #loanHit2{left:0;bottom:0;width:50%;height:18%;z-index:10}
 #mineHit2{right:0;bottom:0;width:50%;height:18%;z-index:10}
-#bankAccountHit{right:3.5%;top:36.2%;width:10%;height:5%;z-index:20}
+#bankAccountHit{right:5%;top:34.8%;width:8%;height:5.5%;z-index:20}
 #backBankHit{left:2%;top:3%;width:12%;height:8%}
 
 #backRepayHit{left:2%;top:3%;width:12%;height:8%}
@@ -155,7 +157,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 .done-empty{padding:24px 0 8px;font-size:20px;font-weight:600;display:flex;justify-content:space-between;color:#292a31}
 .done-empty span{color:#b4b5bc;font-weight:400}
 #myBillHit{left:4%;top:27%;width:92%;height:6%;z-index:10}
-#bankAccountHit{right:3.5%;top:36.2%;width:10%;height:5%;z-index:20}
+#bankAccountHit{right:5%;top:34.8%;width:8%;height:5.5%;z-index:20}
 #accountSecurityHit{left:4%;top:43%;width:92%;height:6%;z-index:10}
 #couponHit{left:4%;top:49%;width:92%;height:6%;z-index:10}
 #privacyHit{left:4%;top:55%;width:92%;height:6%;z-index:10}
@@ -398,7 +400,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
       <div class="loan-detail-row"><span class="muted">Interest</span><span class="val">0</span></div>
       <div class="loan-detail-row"><span class="muted">Fee</span><span class="val">0</span></div>
       <div class="loan-detail-row"><span class="muted">Amount due</span><span class="val">397,000</span></div>
-      <div class="loan-detail-row"><span class="muted">Penalty fee</span><span class="val danger">397,000</span></div>
+      <div class="loan-detail-row"><span class="muted">Penalty fee</span><span class="val danger">97,000</span></div>
       <div class="loan-detail-row"><span class="muted">Days overdue</span><span class="val">441 day</span></div>
       <div class="loan-detail-row"><span class="muted">Loan time</span><span class="val">21/08/2025</span></div>
       <div class="loan-detail-row"><span class="muted">Due date</span><span class="val">21/08/2026</span></div>
